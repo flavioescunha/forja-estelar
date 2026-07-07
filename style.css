@@ -561,18 +561,68 @@ html, body {
 }
 
 /* Responsive */
-@media(max-width:860px){
-  :root{ --reactor-r:90px; }
-  #controls-panel{ width:210px; right:10px; padding:14px 12px; }
-  #energy-wrap{ width:calc(100vw - 240px); }
+.mobile-toggle-btn {
+  display: none;
+  position: absolute;
+  z-index: 200;
+  background: var(--glass-bg);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  color: var(--cyan);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: var(--font-hud);
+  font-weight: 700;
+  font-size: 11px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  text-transform: uppercase;
+  transition: transform 0.1s;
 }
-@media(max-width:600px){
-  :root{ --reactor-r:75px; }
-  #controls-panel{
-    width:100%; right:0; bottom:0; top:auto; transform:none;
-    flex-direction:row; flex-wrap:wrap; border-radius:14px 14px 0 0; padding:10px;
+.mobile-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+@media(max-width:860px){
+  :root{ --reactor-r:80px; }
+  .mobile-toggle-btn { display: block; }
+  #mobile-missions-toggle { top: 15px; left: 15px; }
+  #mobile-controls-toggle { top: 15px; right: 15px; }
+
+  #left-panel-wrapper { 
+    left: -320px;
+    top: 60px;
+    transform: none;
+    height: calc(100vh - 80px);
+    transition: left 0.3s ease;
+    z-index: 150;
+    pointer-events: auto;
+    background: rgba(2,4,8,0.85); /* Fundo um pouco mais escuro para garantir leitura na frente do reator */
+    border-radius: 16px;
   }
+  #left-panel-wrapper.open { left: 15px; }
+
+  #controls-panel { 
+    width: 280px; 
+    right: -320px; 
+    top: 60px; 
+    bottom: auto;
+    transform: none;
+    transition: right 0.3s ease;
+    z-index: 150;
+  }
+  #controls-panel.open { right: 15px; }
+  
+  #energy-wrap{ width:calc(100vw - 60px); bottom: 15px; }
+}
+
+@media(max-width:600px){
+  :root{ --reactor-r:65px; }
   #energy-wrap{ display:none; }
+  #left-panel-wrapper { width: calc(100% - 30px); left: -120%; }
+  #left-panel-wrapper.open { left: 15px; }
+  #controls-panel { width: calc(100% - 30px); right: -120%; }
+  #controls-panel.open { right: 15px; }
 }
 
 /* -- Supernova Effects ------------------------------------------------------- */

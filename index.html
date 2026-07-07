@@ -29,7 +29,9 @@
     <!-- Inventory for Drag & Drop Atoms -->
     <div id="inventory"></div>
 
-
+    <!-- Mobile toggles (Hidden on desktop) -->
+    <button id="mobile-missions-toggle" class="mobile-toggle-btn">📋 Missões</button>
+    <button id="mobile-controls-toggle" class="mobile-toggle-btn">⚙️ Controle</button>
 
     <!-- Controls Panel -->
     <div id="controls-panel">
@@ -236,6 +238,24 @@
   <script src="js/audio.js?v=10"></script>
   <script src="js/nucleus_v2.js?v=10"></script>
   <script src="js/game_v2.js?v=10"></script>
+  
+  <script>
+    // Controle dos painéis no celular
+    const btnMissions = document.getElementById('mobile-missions-toggle');
+    const btnControls = document.getElementById('mobile-controls-toggle');
+    const panelLeft = document.getElementById('left-panel-wrapper');
+    const panelRight = document.getElementById('controls-panel');
+
+    btnMissions.addEventListener('click', () => {
+      panelLeft.classList.toggle('open');
+      panelRight.classList.remove('open');
+    });
+
+    btnControls.addEventListener('click', () => {
+      panelRight.classList.toggle('open');
+      panelLeft.classList.remove('open');
+    });
+  </script>
 
 </body>
 </html>
