@@ -205,6 +205,7 @@
       </p>
       <p class="flavor">"As estrelas são as forjas do universo."</p>
       <button id="start-btn" class="btn btn-primary" style="margin-top:20px;">Iniciar Simulação</button>
+      <div id="game-version" style="margin-top: 15px; font-size: 11px; color: rgba(255, 255, 255, 0.4); text-align: center; font-family: var(--font-hud);"></div>
     </div>
   </div>
 
@@ -255,6 +256,11 @@
       panelRight.classList.toggle('open');
       panelLeft.classList.remove('open');
     });
+
+    // Exibir versão
+    if (typeof GAME_VERSION !== 'undefined') {
+      document.getElementById('game-version').innerText = GAME_VERSION;
+    }
   </script>
 
 </body>

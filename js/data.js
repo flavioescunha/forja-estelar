@@ -1,6 +1,7 @@
 'use strict';
 
 // ── Game constants ──────────────────────────────────────────────────────────
+const GAME_VERSION    = 'v1.0.0';
 const INITIAL_ENERGY  = 1000;
 const MEV_TO_ENERGY   = 10;     // 1 MeV  → 10 game-energy units
 const COULOMB_SCALE   = 0.5;    // game-energy per Z₁·Z₂
