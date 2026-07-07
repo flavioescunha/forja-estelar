@@ -537,6 +537,10 @@ const Game = {
           tooltip.classList.toggle('enlarged');
         });
       });
+      // Permite fechar tocando nele mesmo no mobile
+      tooltip.addEventListener('click', () => {
+        tooltip.classList.remove('visible', 'enlarged');
+      });
     }
   },
 

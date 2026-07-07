@@ -128,6 +128,7 @@ html, body {
 .atom {
   position:absolute; cursor:grab; user-select:none; pointer-events:all;
   transition:transform .15s, filter .15s; z-index:70;
+  touch-action: none;
 }
 .atom:hover { transform:scale(1.18)!important; z-index:80; }
 .atom:active { cursor:grabbing; }
@@ -590,38 +591,58 @@ html, body {
   #mobile-controls-toggle { top: 15px; right: 15px; }
 
   #left-panel-wrapper { 
-    left: -320px;
+    width: 240px;
+    left: -260px;
     top: 60px;
     transform: none;
     height: calc(100vh - 80px);
     transition: left 0.3s ease;
     z-index: 150;
     pointer-events: auto;
-    background: rgba(2,4,8,0.85); /* Fundo um pouco mais escuro para garantir leitura na frente do reator */
+    background: rgba(2,4,8,0.92);
     border-radius: 16px;
   }
   #left-panel-wrapper.open { left: 15px; }
 
   #controls-panel { 
-    width: 280px; 
-    right: -320px; 
+    width: 240px; 
+    right: -260px; 
     top: 60px; 
     bottom: auto;
     transform: none;
     transition: right 0.3s ease;
     z-index: 150;
+    background: rgba(4,18,38,0.95);
   }
   #controls-panel.open { right: 15px; }
   
   #energy-wrap{ width:calc(100vw - 60px); bottom: 15px; }
+
+  /* Tooltip responsivo para não sair da tela */
+  .mission-tooltip {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) scale(0.9) !important;
+    pointer-events: auto !important; /* Permite clicar no próprio tooltip para fechar */
+  }
+  .mission-tooltip.visible {
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+  .mission-tooltip img {
+    width: 220px !important;
+  }
+  .mission-tooltip.enlarged img {
+    width: 85vw !important;
+    max-width: 400px !important;
+  }
 }
 
 @media(max-width:600px){
   :root{ --reactor-r:65px; }
   #energy-wrap{ display:none; }
-  #left-panel-wrapper { width: calc(100% - 30px); left: -120%; }
+  #left-panel-wrapper { width: 220px; left: -240px; }
   #left-panel-wrapper.open { left: 15px; }
-  #controls-panel { width: calc(100% - 30px); right: -120%; }
+  #controls-panel { width: 220px; right: -240px; }
   #controls-panel.open { right: 15px; }
 }
 
