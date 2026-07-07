@@ -24,8 +24,8 @@ const Game = {
     this.s.nuclei = [];
     this.s.bgElectrons = []; // Keep track of background electrons
 
-    // Spawn 10 background electrons
-    for (let i = 0; i < 10; i++) {
+    // Spawn background electrons
+    for (let i = 0; i < 40; i++) {
       const e = this._spawn('e-', 
         Math.random() * (window.innerWidth - 100) + 50,
         Math.random() * (window.innerHeight - 100) + 50
@@ -36,14 +36,46 @@ const Game = {
         this.s.bgElectrons.push(e);
       }
     }
+    this.s.electrons += 30;
     this._cache();
     this._plasma();
     this._bindControls();
     this._bindReactor();
 
+    const bgmAudio = document.getElementById('bgm');
+    if (bgmAudio) {
+      bgmAudio.volume = 1.0; // Start at normal volume
+      
+      const tryPlayBgm = () => {
+        bgmAudio.play().catch(e => {
+          console.log('Autoplay on load blocked, waiting for click', e);
+          document.addEventListener('click', () => {
+            bgmAudio.play().catch(err => console.log('BGM still blocked', err));
+          }, { once: true });
+        });
+      };
+      
+      tryPlayBgm();
+    }
+
     document.getElementById('start-btn').onclick = () => {
       AudioManager.init();
       document.getElementById('tutorial-screen').classList.add('hidden');
+      
+      if (bgmAudio) {
+        let vol = bgmAudio.volume;
+        const targetVol = 0.1; // Reduce to -20 dB
+        const fadeInterval = setInterval(() => {
+          if (vol > targetVol) {
+            vol -= 0.05;
+            if (vol < targetVol) vol = targetVol;
+            bgmAudio.volume = vol;
+          } else {
+            clearInterval(fadeInterval);
+          }
+        }, 100);
+      }
+      
       this._startGame();
     };
     document.getElementById('restart-btn-v').onclick = () => { AudioManager.stopDangerAlarm(); this._restart(); };
@@ -115,8 +147,8 @@ const Game = {
 
     // Respawn bg electrons if needed, or they will stay on screen because they are Nucleus?
     // Actually, s.nuclei.forEach(n => n.remove()) removed them!
-    for (let i = 0; i < 10; i++) {
-      const p = this._randPos(i, 10);
+    for (let i = 0; i < 40; i++) {
+      const p = this._randPos(i, 40);
       const e = this._spawn('e-', p.x, p.y);
       if (e) {
         e.el.style.pointerEvents = 'none';
@@ -124,6 +156,7 @@ const Game = {
         s.bgElectrons.push(e);
       }
     }
+    s.electrons += 30;
 
     INITIAL_INVENTORY.forEach(key => {
       const iso = ISOTOPES[key];
@@ -429,6 +462,22 @@ const Game = {
 
     // ── Controls ──────────────────────────────────────────────────────────────
   _bindControls() {
+    const sfxCheck = document.getElementById('mute-sfx');
+    const bgmCheck = document.getElementById('mute-bgm');
+    const bgmAudio = document.getElementById('bgm');
+
+    if (sfxCheck) {
+      sfxCheck.addEventListener('change', (e) => {
+        if (typeof AudioManager !== 'undefined') AudioManager.setMuteSFX(e.target.checked);
+      });
+    }
+
+    if (bgmCheck && bgmAudio) {
+      bgmCheck.addEventListener('change', (e) => {
+        bgmAudio.muted = e.target.checked;
+      });
+    }
+
     this.e.slider.addEventListener('input', () => {
       this.e.sliderDisp.textContent = this.e.slider.value;
       this._updateCoulomb();
@@ -891,13 +940,16 @@ const Game = {
       } else if(pos2) {
         this._attractAndAnnihilate(pos2);
       }
-    } else if (dp.particleEmitted==='He-4') {
-      const p=this._randPos(0,1);
-      const he4 = this._spawn('He-4',p.x,p.y);
-      if (wasInForge && he4) {
-        he4.isProduct = true;
-        this._addToForge(he4);
-        he4.isProduct = false;
+    } else if (dp.particleEmitted === 'He-4' || dp.particleEmitted === 'H-1' || dp.particleEmitted === 'n') {
+      // Spawn the emitted nuclear particle (alpha, proton, or neutron)
+      const pe = dp.particleEmitted;
+      const px2 = ox + (Math.random() - .5) * 60;
+      const py2 = oy + (Math.random() - .5) * 60;
+      const emitted = this._spawn(pe, px2, py2);
+      if (wasInForge && emitted) {
+        emitted.isProduct = true;
+        this._addToForge(emitted);
+        emitted.isProduct = false;
       }
     } else if (nucleus.decayMode === 'EC') {
       if (s.bgElectrons && s.bgElectrons.length > 0) {
@@ -962,9 +1014,15 @@ const Game = {
     if (nearestElec) {
       this.s.locked = true;
       if (nuc.pauseDecay) nuc.pauseDecay();
-      nuc.setPosition(nuc.x, nuc.y);
+      
+      const midX = (nuc.x + nearestElec.x) / 2;
+      const midY = (nuc.y + nearestElec.y) / 2;
+
+      nuc.el.style.transition = 'left 0.5s ease-in, top 0.5s ease-in';
+      nuc.setPosition(midX, midY);
+      
       nearestElec.el.style.transition = 'left 0.5s ease-in, top 0.5s ease-in';
-      nearestElec.setPosition(nuc.x, nuc.y);
+      nearestElec.setPosition(midX, midY);
       setTimeout(() => {
         this._annihilate(nuc);
         this._removeNucleus(nearestElec);

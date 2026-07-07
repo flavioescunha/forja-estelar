@@ -160,7 +160,7 @@ const Physics = {
     if (!realSeconds) return Infinity;
     // Base scale: ms = 1810.4 * log10(seconds) + 29466
     let ms = 1810.4 * Math.log10(realSeconds) + 29466;
-    return Math.max(80, ms); // Cap minimum to 80ms (for positron-like speed)
+    return Math.max(600, ms); // Cap minimum to 600ms so resonances are still visible
   },
 
   /** Formatted energy delta string. */

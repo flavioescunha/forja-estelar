@@ -67,6 +67,17 @@
           <span class="info-val" id="electrons-display">0</span>
         </div>
       </div>
+      
+      <!-- Sound Controls -->
+      <div class="sound-controls" style="margin-top: 15px; display: flex; gap: 15px; font-size: 0.85em; color: rgba(255,255,255,0.7); justify-content: center;">
+        <label><input type="checkbox" id="mute-sfx"> Mudo (Efeitos)</label>
+        <label><input type="checkbox" id="mute-bgm"> Mudo (Música)</label>
+      </div>
+
+      <!-- Credits -->
+      <div style="margin-top: 15px; text-align: center; font-size: 0.75em; color: rgba(255,255,255,0.5);">
+        Criado por Flávio Cunha, flavioescunha@gmail.com
+      </div>
     </div>
 
     <!-- Energy Bar -->
@@ -182,6 +193,14 @@
         </div>
       </div>
 
+      <p style="text-align: center; margin: 15px 0;">
+        <a href="https://youtu.be/cJjVpqrs_GM" target="_blank" style="color: #00d2ff; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="#ff0000">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+          Assista ao vídeo explicando o jogo
+        </a>
+      </p>
       <p class="flavor">"As estrelas são as forjas do universo."</p>
       <button id="start-btn" class="btn btn-primary" style="margin-top:20px;">Iniciar Simulação</button>
     </div>
@@ -211,7 +230,9 @@
 
   <!-- Scripts -->
   <script src="js/data.js?v=10"></script>
-  <script src="js/physics.js?v=10"></script>
+  <audio id="bgm" src="Space Forge Background BGM.mp3" loop autoplay></audio>
+
+  <script src="js/physics.js"></script>
   <script src="js/audio.js?v=10"></script>
   <script src="js/nucleus_v2.js?v=10"></script>
   <script src="js/game_v2.js?v=10"></script>

@@ -2,16 +2,27 @@
 
 const AudioManager = {
   ctx: null,
+  masterGain: null,
   alarmOsc: null,
   alarmInterval: null,
   initialized: false,
+  muteSFX: false,
 
   init() {
     if (this.initialized) return;
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     if (AudioContext) {
       this.ctx = new AudioContext();
+      this.masterGain = this.ctx.createGain();
+      this.masterGain.connect(this.ctx.destination);
       this.initialized = true;
+    }
+  },
+
+  setMuteSFX(mute) {
+    this.muteSFX = mute;
+    if (this.masterGain) {
+      this.masterGain.gain.value = mute ? 0 : 1;
     }
   },
 
@@ -33,7 +44,7 @@ const AudioManager = {
     gain.gain.linearRampToValueAtTime(0, t + 1.0);
 
     osc.connect(gain);
-    gain.connect(this.ctx.destination);
+    gain.connect(this.masterGain);
     
     osc.start(t);
     osc.stop(t + 1.0);
@@ -54,7 +65,7 @@ const AudioManager = {
     gain.gain.exponentialRampToValueAtTime(0.01, t + 0.3);
 
     osc.connect(gain);
-    gain.connect(this.ctx.destination);
+    gain.connect(this.masterGain);
     
     osc.start(t);
     osc.stop(t + 0.3);
@@ -75,7 +86,7 @@ const AudioManager = {
     gain.gain.linearRampToValueAtTime(0, t + 0.3);
 
     osc.connect(gain);
-    gain.connect(this.ctx.destination);
+    gain.connect(this.masterGain);
     
     osc.start(t);
     osc.stop(t + 0.3);
@@ -99,7 +110,7 @@ const AudioManager = {
       gain.gain.linearRampToValueAtTime(0, t + 0.2);
 
       osc.connect(gain);
-      gain.connect(this.ctx.destination);
+      gain.connect(this.masterGain);
       
       osc.start(t);
       osc.stop(t + 0.2);
@@ -133,7 +144,7 @@ const AudioManager = {
     gain.gain.linearRampToValueAtTime(0, t + 0.15);
 
     osc.connect(gain);
-    gain.connect(this.ctx.destination);
+    gain.connect(this.masterGain);
     
     osc.start(t);
     osc.stop(t + 0.15);
@@ -155,7 +166,7 @@ const AudioManager = {
     gain.gain.exponentialRampToValueAtTime(0.01, t + 0.4);
 
     osc.connect(gain);
-    gain.connect(this.ctx.destination);
+    gain.connect(this.masterGain);
     
     osc.start(t);
     osc.stop(t + 0.4);
@@ -176,7 +187,7 @@ const AudioManager = {
     gain.gain.exponentialRampToValueAtTime(0.01, t + 0.1);
 
     osc.connect(gain);
-    gain.connect(this.ctx.destination);
+    gain.connect(this.masterGain);
     
     osc.start(t);
     osc.stop(t + 0.1);
@@ -198,7 +209,7 @@ const AudioManager = {
     gain.gain.exponentialRampToValueAtTime(0.01, t + 0.15);
 
     osc.connect(gain);
-    gain.connect(this.ctx.destination);
+    gain.connect(this.masterGain);
     
     osc.start(t);
     osc.stop(t + 0.15);
@@ -222,7 +233,7 @@ const AudioManager = {
     gain.gain.exponentialRampToValueAtTime(0.01, t + 0.05);
 
     osc.connect(gain);
-    gain.connect(this.ctx.destination);
+    gain.connect(this.masterGain);
     
     osc.start(t);
     osc.stop(t + 0.05);
@@ -256,8 +267,8 @@ const AudioManager = {
 
     osc.connect(gain);
     osc2.connect(gain2);
-    gain.connect(this.ctx.destination);
-    gain2.connect(this.ctx.destination);
+    gain.connect(this.masterGain);
+    gain2.connect(this.masterGain);
     
     osc.start(t);
     osc2.start(t);
@@ -288,7 +299,7 @@ const AudioManager = {
       gain.gain.exponentialRampToValueAtTime(0.01, endTime);
       
       osc.connect(gain);
-      gain.connect(this.ctx.destination);
+      gain.connect(this.masterGain);
       
       osc.start(startTime);
       osc.stop(endTime);
@@ -309,7 +320,7 @@ const AudioManager = {
       this.motorGain.gain.linearRampToValueAtTime(0.15, t + 0.1);
       
       this.motorOsc.connect(this.motorGain);
-      this.motorGain.connect(this.ctx.destination);
+      this.motorGain.connect(this.masterGain);
       this.motorOsc.start(t);
     }
     
@@ -345,7 +356,7 @@ const AudioManager = {
     gain.gain.exponentialRampToValueAtTime(0.01, t + 0.1);
 
     osc.connect(gain);
-    gain.connect(this.ctx.destination);
+    gain.connect(this.masterGain);
     
     osc.start(t);
     osc.stop(t + 0.1);
@@ -370,7 +381,7 @@ const AudioManager = {
       gain.gain.linearRampToValueAtTime(0, t + 0.3);
 
       osc.connect(gain);
-      gain.connect(this.ctx.destination);
+      gain.connect(this.masterGain);
       
       osc.start(t);
       osc.stop(t + 0.3);
