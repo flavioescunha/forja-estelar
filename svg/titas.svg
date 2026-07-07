@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 550" width="100%" height="100%">
+  <defs>
+    <radialGradient id="c12" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#34495e"/><stop offset="100%" stop-color="#2c3e50"/>
+    </radialGradient>
+    <radialGradient id="o16" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#3498db"/><stop offset="100%" stop-color="#2980b9"/>
+    </radialGradient>
+    <radialGradient id="mg24" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#e67e22"/><stop offset="100%" stop-color="#d35400"/>
+    </radialGradient>
+    <radialGradient id="s32" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#2ecc71"/><stop offset="100%" stop-color="#27ae60"/>
+    </radialGradient>
+    
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50" />
+    </marker>
+    <marker id="arr-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f39c12" />
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff" rx="10"/>
+
+  <style>
+    .title { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #111; }
+    .nuc-text { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #fff; }
+    .lbl { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #111; }
+    .sub { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #c0392b; }
+    .line { stroke: #2c3e50; stroke-width: 3; fill: none; }
+    .gamma { stroke: #f39c12; stroke-width: 2.5; fill: none; }
+  </style>
+
+  <text x="350" y="40" text-anchor="middle" class="title">Choque de Titãs: Queima C+C e O+O</text>
+
+  <text x="350" y="100" text-anchor="middle" class="sub">Fusão de Carbono (Alta Barreira de Coulomb)</text>
+  
+  <g transform="translate(150, 170)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="30" fill="url(#c12)"/>
+    <text x="0" y="7" text-anchor="middle" class="nuc-text">12C</text>
+  </g>
+  
+  <g transform="translate(300, 170)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="30" fill="url(#c12)"/>
+    <text x="0" y="7" text-anchor="middle" class="nuc-text">12C</text>
+  </g>
+
+  <path d="M 190 170 L 260 170" class="line" marker-end="url(#arr)"/>
+  <path d="M 340 170 L 410 170" class="line" marker-end="url(#arr)"/>
+  <polygon points="410,160 420,170 435,170 425,180 430,195 410,185 390,195 395,180 385,170 400,170" fill="#f1c40f" filter="url(#sh)"/>
+
+  <g transform="translate(550, 170)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="38" fill="url(#mg24)"/>
+    <text x="0" y="7" text-anchor="middle" class="nuc-text">24Mg</text>
+  </g>
+  <text x="550" y="235" text-anchor="middle" class="lbl">Magnésio-24</text>
+
+  <path d="M 430 185 Q 460 210 470 190 T 500 220" class="gamma" marker-end="url(#arr-g)"/>
+  <text x="510" y="225" text-anchor="start" class="lbl" fill="#f39c12">γ</text>
+
+  <line x1="100" y1="280" x2="600" y2="280" stroke="#ecf0f1" stroke-width="2" stroke-dasharray="8,8"/>
+
+  <text x="350" y="330" text-anchor="middle" class="sub">Fusão de Oxigênio (Barreira de Coulomb Extrema)</text>
+
+  <g transform="translate(150, 410)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="34" fill="url(#o16)"/>
+    <text x="0" y="7" text-anchor="middle" class="nuc-text">16O</text>
+  </g>
+  
+  <g transform="translate(300, 410)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="34" fill="url(#o16)"/>
+    <text x="0" y="7" text-anchor="middle" class="nuc-text">16O</text>
+  </g>
+
+  <path d="M 195 410 L 255 410" class="line" marker-end="url(#arr)"/>
+  <path d="M 345 410 L 405 410" class="line" marker-end="url(#arr)"/>
+  
+  <polygon points="410,390 425,410 450,410 435,425 445,450 410,435 375,450 385,425 370,410 395,410" fill="#f1c40f" filter="url(#sh)"/>
+
+  <g transform="translate(550, 410)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="42" fill="url(#s32)"/>
+    <text x="0" y="7" text-anchor="middle" class="nuc-text">32S</text>
+  </g>
+  <text x="550" y="480" text-anchor="middle" class="lbl">Enxofre-32</text>
+
+  <path d="M 440 430 Q 470 460 480 440 T 510 470" class="gamma" marker-end="url(#arr-g)"/>
+  <text x="520" y="475" text-anchor="start" class="lbl" fill="#f39c12">γ</text>
+
+</svg>

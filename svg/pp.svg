@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650" width="100%" height="100%">
+  <defs>
+    <radialGradient id="p" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ff6b6b"/><stop offset="100%" stop-color="#cc0000"/>
+    </radialGradient>
+    <radialGradient id="n" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#999999"/><stop offset="100%" stop-color="#444444"/>
+    </radialGradient>
+    <radialGradient id="pos" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cccccc"/>
+    </radialGradient>
+    
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#2c3e50" />
+    </marker>
+    <marker id="arr-dash" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#7f8c8d" />
+    </marker>
+
+    <g id="fusion-star">
+      <polygon points="0,-15 4,-5 14,-4 7,3 9,13 0,8 -9,13 -7,3 -14,-4 -4,-5" fill="#f1c40f" filter="url(#sh)"/>
+    </g>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff" rx="10"/>
+
+  <style>
+    .title { font-family: Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #111; }
+    .lbl { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #111; }
+    .lbl-sm { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #e67e22; }
+    .sub { font-family: Arial, sans-serif; font-size: 12px; fill: #555; }
+    .line { stroke: #2c3e50; stroke-width: 2; fill: none; }
+    .line-dash { stroke: #7f8c8d; stroke-width: 2; stroke-dasharray: 4,4; fill: none; }
+    .gamma { stroke: #e67e22; stroke-width: 2; fill: none; }
+  </style>
+
+  <text x="400" y="40" text-anchor="middle" class="title">Cadeia p-p (Completa): Formação do Hélio-4</text>
+
+  <g transform="translate(0, 0)">
+    <circle cx="150" cy="80" r="14" fill="url(#p)" filter="url(#sh)"/>
+    <circle cx="250" cy="80" r="14" fill="url(#p)" filter="url(#sh)"/>
+    <text x="200" y="65" text-anchor="middle" class="sub">1H + 1H</text>
+
+    <path d="M 155 92 L 195 125" class="line" marker-end="url(#arr)"/>
+    <path d="M 245 92 L 205 125" class="line" marker-end="url(#arr)"/>
+    <use href="#fusion-star" x="200" y="130" />
+
+    <path d="M 190 130 L 130 145" class="line-dash" marker-end="url(#arr-dash)"/>
+    <circle cx="120" cy="150" r="8" fill="url(#pos)" stroke="#999" stroke-width="1" filter="url(#sh)"/>
+    <text x="120" y="175" text-anchor="middle" class="lbl-sm">e+</text>
+
+    <path d="M 195 138 L 155 170" class="line-dash" marker-end="url(#arr-dash)"/>
+    <circle cx="145" cy="180" r="5" fill="#3498db" filter="url(#sh)"/>
+    <text x="145" y="200" text-anchor="middle" class="lbl-sm">ν</text>
+
+    <path d="M 200 140 L 200 190" class="line" marker-end="url(#arr)"/>
+    
+    <g transform="translate(200, 210)" filter="url(#sh)">
+      <circle cx="-10" cy="0" r="14" fill="url(#p)"/>
+      <circle cx="10" cy="0" r="14" fill="url(#n)"/>
+    </g>
+    <text x="235" y="215" text-anchor="start" class="lbl">Deutério (2H)</text>
+  </g>
+
+  <g transform="translate(0, 0)">
+    <circle cx="100" cy="250" r="14" fill="url(#p)" filter="url(#sh)"/>
+    <text x="100" y="230" text-anchor="middle" class="sub">Próton</text>
+
+    <path d="M 200 225 L 200 270" class="line" marker-end="url(#arr)"/>
+    <path d="M 115 250 L 190 275" class="line" marker-end="url(#arr)"/>
+    <use href="#fusion-star" x="200" y="280" />
+
+    <path d="M 190 280 Q 170 270 160 290 T 130 280" class="gamma" marker-end="url(#arr)"/>
+    <text x="120" y="285" text-anchor="end" class="lbl-sm">γ (Gama)</text>
+
+    <path d="M 205 290 L 250 335" class="line" marker-end="url(#arr)"/>
+
+    <g transform="translate(270, 350)" filter="url(#sh)">
+      <circle cx="0" cy="-10" r="14" fill="url(#n)"/>
+      <circle cx="-10" cy="8" r="14" fill="url(#p)"/>
+      <circle cx="10" cy="8" r="14" fill="url(#p)"/>
+    </g>
+    <text x="210" y="355" text-anchor="end" class="lbl">Hélio-3</text>
+  </g>
+
+
+  <g transform="translate(0, 0)">
+    <circle cx="650" cy="80" r="14" fill="url(#p)" filter="url(#sh)"/>
+    <circle cx="550" cy="80" r="14" fill="url(#p)" filter="url(#sh)"/>
+    <text x="600" y="65" text-anchor="middle" class="sub">1H + 1H</text>
+
+    <path d="M 645 92 L 605 125" class="line" marker-end="url(#arr)"/>
+    <path d="M 555 92 L 595 125" class="line" marker-end="url(#arr)"/>
+    <use href="#fusion-star" x="600" y="130" />
+
+    <path d="M 610 130 L 670 145" class="line-dash" marker-end="url(#arr-dash)"/>
+    <circle cx="680" cy="150" r="8" fill="url(#pos)" stroke="#999" stroke-width="1" filter="url(#sh)"/>
+    <text x="680" y="175" text-anchor="middle" class="lbl-sm">e+</text>
+
+    <path d="M 605 138 L 645 170" class="line-dash" marker-end="url(#arr-dash)"/>
+    <circle cx="655" cy="180" r="5" fill="#3498db" filter="url(#sh)"/>
+    <text x="655" y="200" text-anchor="middle" class="lbl-sm">ν</text>
+
+    <path d="M 600 140 L 600 190" class="line" marker-end="url(#arr)"/>
+    
+    <g transform="translate(600, 210)" filter="url(#sh)">
+      <circle cx="-10" cy="0" r="14" fill="url(#p)"/>
+      <circle cx="10" cy="0" r="14" fill="url(#n)"/>
+    </g>
+    <text x="565" y="215" text-anchor="end" class="lbl">Deutério (2H)</text>
+  </g>
+
+  <g transform="translate(0, 0)">
+    <circle cx="700" cy="250" r="14" fill="url(#p)" filter="url(#sh)"/>
+    <text x="700" y="230" text-anchor="middle" class="sub">Próton</text>
+
+    <path d="M 600 225 L 600 270" class="line" marker-end="url(#arr)"/>
+    <path d="M 685 250 L 610 275" class="line" marker-end="url(#arr)"/>
+    <use href="#fusion-star" x="600" y="280" />
+
+    <path d="M 610 280 Q 630 270 640 290 T 670 280" class="gamma" marker-end="url(#arr)"/>
+    <text x="680" y="285" text-anchor="start" class="lbl-sm">γ (Gama)</text>
+
+    <path d="M 595 290 L 550 335" class="line" marker-end="url(#arr)"/>
+
+    <g transform="translate(530, 350)" filter="url(#sh)">
+      <circle cx="0" cy="-10" r="14" fill="url(#n)"/>
+      <circle cx="-10" cy="8" r="14" fill="url(#p)"/>
+      <circle cx="10" cy="8" r="14" fill="url(#p)"/>
+    </g>
+    <text x="590" y="355" text-anchor="start" class="lbl">Hélio-3</text>
+  </g>
+
+
+  <g transform="translate(0, 0)">
+    <path d="M 290 370 L 385 435" class="line" marker-end="url(#arr)"/>
+    <path d="M 510 370 L 415 435" class="line" marker-end="url(#arr)"/>
+    
+    <use href="#fusion-star" x="400" y="445" />
+
+    <path d="M 390 450 L 320 480" class="line" marker-end="url(#arr)"/>
+    <circle cx="300" cy="490" r="14" fill="url(#p)" filter="url(#sh)"/>
+    <text x="270" y="495" text-anchor="end" class="lbl">1H (Próton Ejetado)</text>
+
+    <path d="M 410 450 L 480 480" class="line" marker-end="url(#arr)"/>
+    <circle cx="500" cy="490" r="14" fill="url(#p)" filter="url(#sh)"/>
+    <text x="530" y="495" text-anchor="start" class="lbl">1H (Próton Ejetado)</text>
+
+    <path d="M 400 460 L 400 520" class="line" marker-end="url(#arr)"/>
+    
+    <g transform="translate(400, 550)" filter="url(#sh)">
+      <circle cx="-12" cy="-12" r="15" fill="url(#n)"/>
+      <circle cx="12" cy="12" r="15" fill="url(#n)"/>
+      <circle cx="12" cy="-12" r="15" fill="url(#p)"/>
+      <circle cx="-12" cy="12" r="15" fill="url(#p)"/>
+    </g>
+    <text x="400" y="610" text-anchor="middle" class="lbl">Hélio-4 (Partícula Alfa Estável)</text>
+    <text x="400" y="630" text-anchor="middle" class="sub">Objetivo Principal Alcançado</text>
+  </g>
+
+</svg>

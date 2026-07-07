@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forja de Elementos</title>
+  <link rel="stylesheet" href="style.css?v=10">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Game Board -->
+  <div id="game-board">
+    
+    <!-- Reactor Center -->
+    <div id="reactor-wrap">
+      <div id="reactor-glow"></div>
+      <div id="reactor">
+        <canvas id="plasma-canvas"></canvas>
+        <div id="reactor-label">FORJA ESTELAR<span>Arraste os isótopos aqui</span></div>
+        <div id="slot-row">
+          <div class="si" id="si-1"></div>
+          <div class="si" id="si-2"></div>
+          <div class="si hidden" id="si-3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory for Drag & Drop Atoms -->
+    <div id="inventory"></div>
+
+
+
+    <!-- Controls Panel -->
+    <div id="controls-panel">
+      <div class="panel-hdr">
+        <h2>Painel de Controle</h2>
+      </div>
+
+      <!-- Temperature / Coulomb Slider -->
+      <div class="ctrl-group">
+        <div class="ctrl-lbl"><span>Temperatura (Energia):</span><span class="val-disp"><span id="temp-display">50</span> ⚡</span></div>
+        <input type="range" id="temp-slider" min="5" max="500" step="5" value="50">
+        <div class="coulomb-row">
+          <span>Barreira de Coulomb:</span>
+          <span id="coulomb-display" class="coulomb-val">–</span>
+        </div>
+      </div>
+
+      <!-- Current Reaction Info -->
+      <div class="rxn-box">
+        <div id="rxn-description">Arraste 2 isótopos para o reator</div>
+        <div id="rxn-q" class="rxn-q"></div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; gap: 10px; width: 100%;">
+        <button id="fuse-btn" class="btn btn-primary" style="flex: 3;" disabled><span class="btn-icon">⚡</span> Fundir</button>
+        <button id="ffwd-btn" class="btn" style="flex: 1; background:#ff9800; color:#fff; padding: 0; min-width: 0;" title="Acelerar Decaimento"><span class="btn-icon" style="margin-right: 0;">⏩</span></button>
+      </div>
+      <button id="fiss-btn" class="btn btn-danger"><span class="btn-icon">💥</span> Fissão de Emerg.</button>
+
+      <!-- Stats -->
+      <div class="info-box">
+        <div class="info-row">
+          <span class="info-lbl">Elétrons no Vácuo:</span>
+          <span class="info-val" id="electrons-display">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Energy Bar -->
+    <div id="energy-wrap">
+      <div class="energy-lbl"><span>Balanço Energético</span><span id="energy-pct">100%</span></div>
+      <div id="energy-track">
+        <div id="energy-fill">
+          <div id="energy-shimmer"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Left Panel: History & Missions -->
+    <div id="left-panel-wrapper">
+      
+      <!-- Missions Panel -->
+      <div id="missions-panel">
+        <div class="panel-hdr">
+          <h2>Missões Estelares</h2>
+        </div>
+        <ul id="missions-list">
+          <li class="mission-item" id="mission-pp">
+            <div class="mission-progress" id="prog-pp"></div>
+            <span class="mission-check"></span>
+            <span class="mission-text">1. Cadeia p-p</span>
+            <span class="mission-reward">0%</span>
+          </li>
+          <li class="mission-item" id="mission-ta">
+            <div class="mission-progress" id="prog-ta"></div>
+            <span class="mission-check"></span>
+            <span class="mission-text">2. Triplo-Alfa</span>
+            <span class="mission-reward">0%</span>
+          </li>
+          <li class="mission-item" id="mission-cno">
+            <div class="mission-progress" id="prog-cno"></div>
+            <span class="mission-check"></span>
+            <span class="mission-text">3. Ciclo CNO</span>
+            <span class="mission-reward">0%</span>
+          </li>
+          <li class="mission-item" id="mission-dt">
+            <div class="mission-progress" id="prog-dt"></div>
+            <span class="mission-check"></span>
+            <span class="mission-text">4. Fusão D-T</span>
+            <span class="mission-reward">0%</span>
+          </li>
+          <li class="mission-item" id="mission-ladder">
+            <div class="mission-progress" id="prog-ladder"></div>
+            <span class="mission-check"></span>
+            <span class="mission-text">5. Escada Alfa</span>
+            <span class="mission-reward">0%</span>
+          </li>
+          <li class="mission-item" id="mission-titans">
+            <div class="mission-progress" id="prog-titans"></div>
+            <span class="mission-check"></span>
+            <span class="mission-text">6. Choque de Titãs</span>
+            <span class="mission-reward">0%</span>
+          </li>
+          <li class="mission-item" id="mission-sisi">
+            <div class="mission-progress" id="prog-sisi"></div>
+            <span class="mission-check"></span>
+            <span class="mission-text">7. O Último Suspiro</span>
+            <span class="mission-reward">0%</span>
+          </li>
+          <li class="mission-item" id="mission-iron">
+            <div class="mission-progress" id="prog-iron"></div>
+            <span class="mission-check"></span>
+            <span class="mission-text">8. Maldição do Ferro</span>
+            <span class="mission-reward">0%</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- History Panel -->
+      <div id="history-panel">
+      <div class="panel-hdr">
+        <h2>Registro de Ações</h2>
+      </div>
+      <div id="history-list"></div>
+    </div>
+    </div> <!-- Close left-panel-wrapper -->
+
+  </div>
+
+  <!-- Mission Tooltip -->
+  <div id="mission-tooltip" class="mission-tooltip">
+    <img id="mission-tooltip-img" src="" alt="Mission Image">
+  </div>
+
+  <!-- Tutorial Overlay -->
+  <div id="tutorial-screen" class="overlay">
+    <div class="ov-box">
+      <span class="ov-icon">✨</span>
+      <h1>Forja de Elementos</h1>
+      <p>Bem-vindo ao reator estelar. Seu objetivo é fundir isótopos a partir do Hidrogênio e chegar até o <strong>Ferro-56</strong>, mantendo o balanço de energia positivo.</p>
+      
+      <div class="tut-steps">
+        <div class="tut-step">
+          <div class="step-num">1</div>
+          <div>Arraste 2 isótopos para o <strong>Reator Central</strong>.</div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">2</div>
+          <div>Ajuste a <strong>Temperatura</strong> no painel para vencer a Barreira de Coulomb e clique em <em>Fundir</em>.</div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">3</div>
+          <div>Cuidado com isótopos instáveis! Eles decaem com o tempo (T½).</div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">4</div>
+          <div>Para formar o Carbono, você precisará pausar o tempo rapidamente durante o <strong>Processo Triplo-Alfa</strong>!</div>
+        </div>
+      </div>
+
+      <p class="flavor">"As estrelas são as forjas do universo."</p>
+      <button id="start-btn" class="btn btn-primary" style="margin-top:20px;">Iniciar Simulação</button>
+    </div>
+  </div>
+
+  <!-- Victory Overlay -->
+  <div id="victory-screen" class="overlay hidden">
+    <div class="ov-box victory">
+      <span class="ov-icon">🏆</span>
+      <h1>Nucleossíntese Concluída</h1>
+      <p>Você atingiu o pico da estabilidade nuclear!</p>
+      <p>A forja sintetizou com sucesso um núcleo estável de <strong>Ferro-56</strong>. O universo agradece por esta nova matéria.</p>
+      <button id="restart-btn-v" class="btn btn-primary" style="margin-top:20px;">Nova Forja</button>
+    </div>
+  </div>
+
+  <!-- Defeat Overlay -->
+  <div id="defeat-screen" class="overlay hidden">
+    <div class="ov-box defeat">
+      <span class="ov-icon">💀</span>
+      <h1>Forja Apagada</h1>
+      <p>O reator colapsou devido à falta de energia.</p>
+      <p>A nucleossíntese foi interrompida prematuramente. Você gastou mais energia na quebra da barreira de Coulomb do que o reator foi capaz de gerar através de fusões exotérmicas.</p>
+      <button id="restart-btn-d" class="btn btn-danger" style="margin-top:20px;">Reiniciar Forja</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js?v=10"></script>
+  <script src="js/physics.js?v=10"></script>
+  <script src="js/audio.js?v=10"></script>
+  <script src="js/nucleus_v2.js?v=10"></script>
+  <script src="js/game_v2.js?v=10"></script>
+
+</body>
+</html>

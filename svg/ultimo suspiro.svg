@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 500" width="100%" height="100%">
+  <defs>
+    <radialGradient id="si28" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#2980b9"/><stop offset="100%" stop-color="#2c3e50"/>
+    </radialGradient>
+    <radialGradient id="ni56" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#8e44ad"/><stop offset="100%" stop-color="#4a235a"/>
+    </radialGradient>
+    
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#c0392b" />
+    </marker>
+    <marker id="arr-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f39c12" />
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff" rx="10"/>
+
+  <style>
+    .title { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #111; }
+    .nuc-text { font-family: Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #fff; }
+    .lbl { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #111; }
+    .alert { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #c0392b; }
+    .line { stroke: #c0392b; stroke-width: 4; stroke-dasharray: 6,4; fill: none; }
+    .gamma { stroke: #f39c12; stroke-width: 2.5; fill: none; }
+  </style>
+
+  <text x="350" y="40" text-anchor="middle" class="title">O Último Suspiro: Queima de Silício</text>
+
+  <g transform="translate(200, 150)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="40" fill="url(#si28)"/>
+    <text x="0" y="8" text-anchor="middle" class="nuc-text">28Si</text>
+  </g>
+  <text x="200" y="220" text-anchor="middle" class="lbl">Silício-28</text>
+
+  <g transform="translate(500, 150)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="40" fill="url(#si28)"/>
+    <text x="0" y="8" text-anchor="middle" class="nuc-text">28Si</text>
+  </g>
+  <text x="500" y="220" text-anchor="middle" class="lbl">Silício-28</text>
+
+  <path d="M 245 150 L 300 150" class="line" marker-end="url(#arr)"/>
+  <path d="M 455 150 L 400 150" class="line" marker-end="url(#arr)"/>
+
+  <text x="350" y="110" text-anchor="middle" class="alert">Barreira de Coulomb Extrema!</text>
+
+  <polygon points="350,110 365,135 395,135 375,155 385,185 350,165 315,185 325,155 305,135 335,135" fill="#f1c40f" filter="url(#sh)"/>
+
+  <path d="M 370 170 Q 400 200 420 180 T 460 210" class="gamma" marker-end="url(#arr-g)"/>
+  <text x="470" y="215" text-anchor="start" class="lbl" fill="#f39c12">Radiação γ</text>
+
+  <path d="M 350 190 L 350 310" class="line" marker-end="url(#arr)" stroke="#2c3e50" stroke-dasharray="none"/>
+
+  <g transform="translate(350, 380)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="55" fill="url(#ni56)"/>
+    <circle cx="0" cy="0" r="45" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4,4" opacity="0.5"/>
+    <text x="0" y="8" text-anchor="middle" class="nuc-text">56Ni</text>
+  </g>
+  <text x="350" y="460" text-anchor="middle" class="lbl">Níquel-56 (Muito Instável)</text>
+</svg>

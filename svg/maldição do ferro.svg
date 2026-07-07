@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650" width="100%" height="100%">
+  <defs>
+    <radialGradient id="ni" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="#8e44ad"/><stop offset="100%" stop-color="#4a235a"/></radialGradient>
+    <radialGradient id="co" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="#d35400"/><stop offset="100%" stop-color="#a04000"/></radialGradient>
+    <radialGradient id="fe" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="#7f8c8d"/><stop offset="100%" stop-color="#2c3e50"/></radialGradient>
+    <radialGradient id="he" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="#e74c3c"/><stop offset="100%" stop-color="#c0392b"/></radialGradient>
+    
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2c3e50" /></marker>
+    <marker id="arr-b" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#3498db" /></marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff" rx="10"/>
+
+  <style>
+    .title { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #111; }
+    .subtitle { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #555; }
+    .nuc-text { font-family: Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #fff; }
+    .lbl { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #111; }
+    .lbl-sm { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #3498db; }
+    .line { stroke: #2c3e50; stroke-width: 3; fill: none; }
+    .line-dash { stroke: #3498db; stroke-width: 2; stroke-dasharray: 4,4; fill: none; }
+    .nova-text { font-family: Arial, sans-serif; font-size: 28px; font-weight: bold; fill: #fff; }
+  </style>
+
+  <text x="400" y="40" text-anchor="middle" class="title">A Maldição do Ferro</text>
+
+  <text x="400" y="80" text-anchor="middle" class="subtitle">1. O Caminho do Decaimento Beta</text>
+
+  <g transform="translate(150, 160)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="45" fill="url(#ni)"/>
+    <text x="0" y="8" text-anchor="middle" class="nuc-text">56Ni</text>
+  </g>
+
+  <path d="M 205 160 L 335 160" class="line" marker-end="url(#arr)"/>
+  
+  <path d="M 270 160 Q 270 210 240 230" class="line-dash" marker-end="url(#arr-b)"/>
+  <text x="220" y="245" text-anchor="middle" class="lbl-sm">e+ / ν</text>
+  <text x="270" y="145" text-anchor="middle" class="lbl">100%</text>
+
+  <g transform="translate(400, 160)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="45" fill="url(#co)"/>
+    <text x="0" y="8" text-anchor="middle" class="nuc-text">56Co</text>
+  </g>
+
+  <path d="M 455 160 L 585 160" class="line" marker-end="url(#arr)"/>
+
+  <path d="M 520 160 Q 520 210 490 230" class="line-dash" marker-end="url(#arr-b)"/>
+  <text x="470" y="245" text-anchor="middle" class="lbl-sm">e+ / ν</text>
+  <text x="520" y="145" text-anchor="middle" class="lbl">100%</text>
+
+  <g transform="translate(650, 160)" filter="url(#glow)">
+    <circle cx="0" cy="0" r="45" fill="url(#fe)" stroke="#f1c40f" stroke-width="4"/>
+    <text x="0" y="8" text-anchor="middle" class="nuc-text">56Fe</text>
+  </g>
+  <text x="650" y="230" text-anchor="middle" class="lbl" fill="#27ae60">FERRO ESTÁVEL</text>
+
+
+  <line x1="50" y1="280" x2="750" y2="280" stroke="#ccc" stroke-width="2" stroke-dasharray="8,8"/>
+  <text x="400" y="320" text-anchor="middle" class="subtitle">2. A Tentativa Final (O Colapso da Forja)</text>
+
+  <g transform="translate(250, 450)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="45" fill="url(#fe)"/>
+    <text x="0" y="8" text-anchor="middle" class="nuc-text">56Fe</text>
+  </g>
+  <text x="250" y="520" text-anchor="middle" class="lbl">Ferro-56</text>
+
+  <g transform="translate(150, 350)" filter="url(#sh)">
+    <circle cx="-10" cy="-10" r="14" fill="url(#he)"/><circle cx="10" cy="10" r="14" fill="url(#he)"/>
+    <circle cx="10" cy="-10" r="14" fill="#999"/><circle cx="-10" cy="10" r="14" fill="#999"/>
+  </g>
+  <text x="150" y="315" text-anchor="middle" class="lbl">Hélio-4</text>
+
+  <path d="M 180 380 L 220 420" class="line" marker-end="url(#arr)"/>
+  
+  <path d="M 310 450 L 450 450" class="line" marker-end="url(#arr)"/>
+  <text x="380" y="440" text-anchor="middle" class="lbl" fill="#c0392b">REAÇÃO ENDOTÉRMICA</text>
+  <text x="380" y="475" text-anchor="middle" class="lbl" fill="#c0392b">DRENA ENERGIA (Q &lt; 0)</text>
+
+  <g transform="translate(600, 450)">
+    <polygon points="0,-70 20,-30 70,-20 35,10 50,60 0,35 -50,60 -35,10 -70,-20 -20,-30" fill="#2c3e50" filter="url(#glow)"/>
+    <polygon points="0,-50 15,-20 50,-10 25,10 35,45 0,25 -35,45 -25,10 -50,-10 -15,-20" fill="#34495e"/>
+    <text x="0" y="8" text-anchor="middle" class="nova-text">SUPERNOVA!</text>
+  </g>
+  <text x="600" y="540" text-anchor="middle" class="lbl">Game Over / Fim do Ciclo Estelar</text>
+
+</svg>

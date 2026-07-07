@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <radialGradient id="p" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ff6b6b"/><stop offset="100%" stop-color="#cc0000"/>
+    </radialGradient>
+    <radialGradient id="n" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#999999"/><stop offset="100%" stop-color="#444444"/>
+    </radialGradient>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50" />
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff" rx="10"/>
+
+  <style>
+    .title { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #111; }
+    .lbl { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #111; }
+    .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #555; }
+    .line { stroke: #2c3e50; stroke-width: 2; fill: none; }
+  </style>
+
+  <text x="300" y="40" text-anchor="middle" class="title">Fusão Deutério - Trítio</text>
+
+  <g transform="translate(150, 100)" filter="url(#sh)">
+    <circle cx="15" cy="15" r="18" fill="url(#n)" />
+    <circle cx="-10" cy="-10" r="18" fill="url(#p)" />
+  </g>
+  <text x="150" y="160" text-anchor="middle" class="lbl">Deutério</text>
+
+  <g transform="translate(450, 100)" filter="url(#sh)">
+    <circle cx="-15" cy="15" r="18" fill="url(#n)" />
+    <circle cx="15" cy="-5" r="18" fill="url(#n)" />
+    <circle cx="-5" cy="-15" r="18" fill="url(#p)" />
+  </g>
+  <text x="450" y="160" text-anchor="middle" class="lbl">Trítio (Instável)</text>
+
+  <path d="M 170 170 Q 220 230 280 250" class="line" marker-end="url(#arr)"/>
+  <path d="M 430 170 Q 380 230 320 250" class="line" marker-end="url(#arr)"/>
+
+  <polygon points="300,230 310,245 325,245 315,255 320,270 300,260 280,270 285,255 275,245 290,245" fill="#f1c40f" filter="url(#sh)"/>
+  <text x="300" y="295" text-anchor="middle" class="lbl" fill="#e67e22">Energia Máxima (17.6 MeV)</text>
+
+  <g transform="translate(220, 340)" filter="url(#sh)">
+    <circle cx="-12" cy="12" r="18" fill="url(#n)" />
+    <circle cx="12" cy="-12" r="18" fill="url(#n)" />
+    <circle cx="-12" cy="-12" r="18" fill="url(#p)" />
+    <circle cx="12" cy="12" r="18" fill="url(#p)" />
+  </g>
+  <path d="M 290 270 L 250 310" class="line" marker-end="url(#arr)"/>
+  <text x="220" y="390" text-anchor="middle" class="lbl">Hélio-4</text>
+
+  <g transform="translate(400, 340)" filter="url(#sh)">
+    <circle cx="0" cy="0" r="18" fill="url(#n)" />
+  </g>
+  <path d="M 310 270 L 380 315" class="line" marker-end="url(#arr)"/>
+  <text x="400" y="390" text-anchor="middle" class="lbl">Nêutron livre</text>
+</svg>
