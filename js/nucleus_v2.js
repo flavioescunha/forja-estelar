@@ -248,20 +248,41 @@ class Nucleus {
   }
 
   // ── Tooltip ───────────────────────────────────────────────────────────────
+  _formatTime(s) {
+    if (!s) return '0s';
+    if (s < 0.01) return s.toExponential(1).replace('+', '') + 's';
+    if (s < 60) return s.toFixed(1) + 's';
+    if (s < 3600) return (s / 60).toFixed(1) + 'm';
+    if (s < 86400) return (s / 3600).toFixed(1) + 'h';
+    if (s < 31536000) return (s / 86400).toFixed(1) + 'd';
+    if (s > 31536000 * 1000) return (s / 31536000).toExponential(1).replace('+', '') + 'a';
+    return (s / 31536000).toFixed(1) + 'a';
+  }
+
   _showTip(e) {
     this._hideTip();
     const t   = document.createElement('div');
     t.className = 'atom-tooltip';
-    const rem = (!this.isStable && this._decayStartTime)
-      ? Math.max(0,(this.halfLife_ms-(Date.now()-this._decayStartTime))/1000).toFixed(1) + 's restantes'
-      : '';
+    
+    let timeInfo = '';
+    if (this.isStable) {
+      timeInfo = '<span style="color:#00e676">Estável ✓</span>';
+    } else {
+      const realHl = this.isotope.realHalfLife_s !== undefined ? this.isotope.realHalfLife_s : (this.halfLife_ms / 1000);
+      let hlStr = this._formatTime(realHl);
+      let remStr = '';
+      if (this._decayStartTime && this.halfLife_ms > 0) {
+        const pct = Math.max(0, this.halfLife_ms - (Date.now() - this._decayStartTime)) / this.halfLife_ms;
+        remStr = ' ' + this._formatTime(realHl * pct) + ' rest.';
+      }
+      timeInfo = `<span style="color:#ff6d00">Instável ⚠ T½=${hlStr}${remStr}</span>`;
+    }
+
     t.innerHTML = `
       <div class="tt-name">${this.name} <sup>${this.A}</sup>${this.symbol}</div>
       <div class="tt-stats">Z=${this.Z} &nbsp; N=${this.N} &nbsp; A=${this.A}<br>
         ${this.mass_u.toFixed(6)} u<br>
-        ${this.isStable
-          ? '<span style="color:#00e676">Estável ✓</span>'
-          : `<span style="color:#ff6d00">Instável ⚠ T½=${(this.halfLife_ms/1000).toFixed(1)}s ${rem}</span>`}
+        ${timeInfo}
       </div>`;
     document.body.appendChild(t);
     this._tooltipEl = t;
