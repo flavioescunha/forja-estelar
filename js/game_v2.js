@@ -522,18 +522,18 @@ const Game = {
           if (svgSrc) {
             tooltipImg.src = encodeURI(svgSrc);
             tooltip.classList.add('visible');
-            
             const rect = item.getBoundingClientRect();
-            // Posiciona à direita do item da missão
             tooltip.style.left = (rect.right + 10) + 'px';
             tooltip.style.top = rect.top + 'px';
           }
         });
         item.addEventListener('mouseleave', () => {
-          tooltip.classList.remove('visible');
-          tooltip.classList.remove('enlarged');
+          tooltip.classList.remove('visible', 'enlarged');
         });
         item.addEventListener('click', () => {
+          const svgSrc = missionMap[item.id];
+          if (svgSrc) tooltipImg.src = encodeURI(svgSrc);
+          tooltip.classList.add('visible');
           tooltip.classList.toggle('enlarged');
         });
       });
@@ -601,6 +601,12 @@ const Game = {
 
     this._energy(-invested);
     AudioManager.playMachineStart();
+
+    // Retrair o painel de controle no mobile após fundir
+    if (window.innerWidth <= 860) {
+      const pRight = document.getElementById('controls-panel');
+      if (pRight) pRight.classList.remove('open');
+    }
 
     if (invested < barrier) {
       AudioManager.playFuseFail();
