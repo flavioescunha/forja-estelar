@@ -635,8 +635,10 @@ const Game = {
         AudioManager.playFuseFail();
         this._energy(invested);
         
-        // Let it form He-2 naturally
-        this._applyFusion(['He-2'], n1, n2, 0, 'Dipróton formado! Instável, energia devolvida.');
+        const failProducts = rxn.products_fail || ['He-2'];
+        const failDesc = rxn.fail_description || 'Dipróton formado! Instável, energia devolvida.';
+        
+        this._applyFusion(failProducts, n1, n2, 0, failDesc);
         return;
       }
     }

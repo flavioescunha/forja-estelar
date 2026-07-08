@@ -29,7 +29,7 @@ const ISOTOPES = {
   'He-8': { Z:2, N:6, A:8, symbol:'He', name:'He-8', mass_u:8.033934, isStable:false, realHalfLife_s:0.1191, decayMode:'BETA_MINUS' },
   'He-9': { Z:2, N:7, A:9, symbol:'He', name:'He-9', mass_u:9.043946, isStable:false, realHalfLife_s:0, decayMode:'NEUTRON_EMISSION' },
   'He-10': { Z:2, N:8, A:10, symbol:'He', name:'He-10', mass_u:10.052815, isStable:false, realHalfLife_s:1.5207923835712858e-21, decayMode:'NEUTRON_EMISSION' },
-  'Li-4': { Z:3, N:1, A:4, symbol:'Li', name:'Li-4', mass_u:4.027186, isStable:false, realHalfLife_s:0, decayMode:'PROTON_EMISSION' },
+  'Li-4': { Z:3, N:1, A:4, symbol:'Li', name:'Li-4', mass_u:4.027186, isStable:false, realHalfLife_s:2e-16, decayMode:'PROTON_EMISSION' },
   'Li-5': { Z:3, N:2, A:5, symbol:'Li', name:'Li-5', mass_u:5.012538, isStable:false, realHalfLife_s:3.709249716027526e-22, decayMode:'PROTON_EMISSION' },
   'Li-6': { Z:3, N:3, A:6, symbol:'Li', name:'Li-6', mass_u:6.015123, isStable:true },
   'Li-7': { Z:3, N:4, A:7, symbol:'Li', name:'Li-7', mass_u:7.016003, isStable:true },
@@ -709,6 +709,8 @@ const REACTIONS = {
     probabilistic: true,
     success_chance: 0.01,
     products_success: ['He-4', 'e+'],
+    products_fail: ['Li-4'],
+    fail_description: 'Lítio-4 formado! Instável, decai em 1s. No Sol, essa reação só ocorre em 1 a cada 10 milhões de tentativas (1% no jogo).',
     Q_MeV: 18.8,
     description: 'Cadeia pp IV (hep): p + He-3 → He-4 + e⁺ (Raro!)'
   },
