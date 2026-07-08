@@ -120,7 +120,7 @@ const Game = {
       tripleAlpha:false, fissionMode:false, over:false, won:false, locked:false, lastMsg:null,
       missions: {
         pp: { step: 0, max: 3, done: false },
-        ta: { step: 0, max: 2, done: false },
+        ta: { step: 0, max: 5, done: false },
         cno: { step: 0, max: 6, done: false },
         dt: { step: 0, max: 3, done: false },
         ladder: { step: 0, max: 4, done: false },
@@ -1143,9 +1143,12 @@ const Game = {
 
     // 2. Triplo-Alfa
     if (!s.missions.ta.done) {
-      if (products.includes('Be-8')) this._updateMissionProgress('ta', 1);
-      if (products.includes('C-12') && description.match(/Triplo/i)) {
-        this._updateMissionProgress('ta', 2);
+      if (products.includes('He-2') && s.missions.ta.step === 0) this._updateMissionProgress('ta', 1);
+      if (products.includes('He-3') && s.missions.ta.step === 1) this._updateMissionProgress('ta', 2);
+      if (products.includes('He-4') && description.match(/pp/i) && s.missions.ta.step === 2) this._updateMissionProgress('ta', 3);
+      if (products.includes('Be-8') && s.missions.ta.step === 3) this._updateMissionProgress('ta', 4);
+      if (products.includes('C-12') && description.match(/Triplo/i) && s.missions.ta.step === 4) {
+        this._updateMissionProgress('ta', 5);
         this._completeMission('ta', 'Triplo-Alfa', 100);
       }
     }
