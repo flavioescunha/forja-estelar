@@ -1,7 +1,7 @@
 'use strict';
 
 // ── Game constants ──────────────────────────────────────────────────────────
-const GAME_VERSION    = 'v1.0.4';
+const GAME_VERSION    = 'v1.0.5';
 const INITIAL_ENERGY  = 1000;
 const MEV_TO_ENERGY   = 10;     // 1 MeV  → 10 game-energy units
 const COULOMB_SCALE   = 0.5;    // game-energy per Z₁·Z₂
@@ -806,9 +806,47 @@ const DECAY_PRODUCTS = {
 };
 
 // ── Starting inventory ───────────────────────────────────────────────────────
-const INITIAL_INVENTORY = [
-  'H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1', // 12 protons
-  'H-2','H-2',                                  // 2 deuterium
-  'He-4','He-4','He-4','He-4','He-4','He-4','He-4','He-4', // 8 alphas
-  'C-12','C-12','C-12'                          // 3 carbon-12 (to skip the triple-alpha bottleneck if needed)
-];
+const STAR_COMPOSITIONS = {
+  'sol': [
+    'H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1',
+    'H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1',
+    'H-1','H-1','H-1','H-1', // 24 protons
+    'H-2','H-2',             // 2 deuterium
+    'He-4','He-4'            // 2 alphas
+  ],
+  'proxima': [
+    'H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1',
+    'H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1',
+    'H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1' // 28 protons, no He
+  ],
+  'deneb': [
+    'H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1',
+    'H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1', // 18 protons
+    'He-4','He-4','He-4','He-4','He-4','He-4' // 6 alphas
+  ],
+  'aldebaran': [
+    'H-1','H-1','H-1','H-1','H-1','H-1','H-1','H-1', // 8 protons
+    'He-4','He-4','He-4','He-4','He-4','He-4','He-4','He-4', // 8 alphas
+    'C-12','C-12','O-16'
+  ],
+  'betelgeuse': [
+    'He-4','He-4','He-4','He-4','He-4','He-4','He-4','He-4',
+    'C-12','C-12','C-12','C-12', 'O-16','O-16','O-16',
+    'Ne-20', 'Ne-20', 'Mg-24', 'Si-28'
+  ],
+  'procyon_b': [
+    'C-12','C-12','C-12','C-12','C-12','C-12','C-12','C-12',
+    'O-16','O-16','O-16','O-16','O-16','O-16','O-16','O-16'
+  ],
+  'eridani_b': [
+    'C-12','C-12','C-12','C-12','C-12','C-12',
+    'O-16','O-16','O-16','O-16','O-16','O-16',
+    'Ne-20','Ne-20'
+  ]
+};
+
+let INITIAL_INVENTORY = STAR_COMPOSITIONS['sol'];
+
+function getInitialInventory(starId) {
+  return STAR_COMPOSITIONS[starId] || STAR_COMPOSITIONS['sol'];
+}

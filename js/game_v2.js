@@ -158,6 +158,11 @@ const Game = {
     }
     s.electrons += 30;
 
+    const starSelect = document.getElementById('star-select');
+    if (starSelect) {
+      INITIAL_INVENTORY = getInitialInventory(starSelect.value);
+    }
+
     INITIAL_INVENTORY.forEach(key => {
       const iso = ISOTOPES[key];
       if (iso) s.electrons += iso.Z;
@@ -639,18 +644,39 @@ const Game = {
         const failDesc = rxn.fail_description || 'Dipróton formado! Instável, energia devolvida.';
         
         this._applyFusion(failProducts, n1, n2, 0, failDesc);
+        
+        // Auto-retry logic
+        const autoRetry = document.getElementById('auto-retry-fusion');
+        if (autoRetry && autoRetry.checked && !this.s.over && !this.s.won) {
+          setTimeout(() => {
+            if (this.s.over || this.s.won) return;
+            this._fastForwardDecay();
+            setTimeout(() => {
+              if (this.s.over || this.s.won || this.s.forge.length < 2) return;
+              this._fuse();
+            }, 600); // 600ms to allow decay animation to return protons to forge
+          }, 1550); // 1550ms to allow applyFusion 1.5s delay to finish and put He-2 in forge
+        }
         return;
       }
     }
 
+    // Helper to clear auto-retry on success
+    const clearAutoRetry = () => {
+      const cb = document.getElementById('auto-retry-fusion');
+      if (cb) cb.checked = false;
+    };
+
     // Triple-alpha trigger
     if (resolvedRxn.special === 'TRIPLE_ALPHA_TRIGGER') {
+      clearAutoRetry();
       this._applyFusion(resolvedRxn.products, n1, n2, resolvedRxn.Q_MeV, resolvedRxn.description);
       this._activateTripleAlpha();
       return;
     }
 
     if (resolvedRxn.special === 'SUPERNOVA_TRIGGER') {
+      clearAutoRetry();
       this.s.won = true; // Previne que o jogo acabe em derrota ('Colapso') devido à queda de energia
       this._applyFusion(resolvedRxn.products, n1, n2, resolvedRxn.Q_MeV, resolvedRxn.description);
       setTimeout(() => this._triggerSupernova(), 600);
@@ -658,6 +684,7 @@ const Game = {
     }
 
     if (resolvedRxn.special === 'TRIPLE_ALPHA_COMPLETE') {
+      clearAutoRetry();
       clearInterval(this.s.taTimerInterval);
       clearTimeout(this.s.taTimer);
       if (typeof AudioManager !== 'undefined') AudioManager.stopTripleAlphaAlarm();
@@ -671,6 +698,7 @@ const Game = {
       return;
     }
 
+    clearAutoRetry();
     AudioManager.playFuseSuccess();
     this._applyFusion(resolvedRxn.products, n1, n2, resolvedRxn.Q_MeV, resolvedRxn.description);
   },

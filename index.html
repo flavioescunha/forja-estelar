@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forja de Elementos</title>
-  <link rel="stylesheet" href="style.css?v=12">
+  <link rel="stylesheet" href="style.css?v=13">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -60,6 +60,12 @@
         <button id="fuse-btn" class="btn btn-primary" style="flex: 3;" disabled><span class="btn-icon">⚡</span> Fundir</button>
         <button id="ffwd-btn" class="btn" style="flex: 1; background:#ff9800; color:#fff; padding: 0; min-width: 0;" title="Acelerar Decaimento"><span class="btn-icon" style="margin-right: 0;">⏩</span></button>
       </div>
+      
+      <div style="margin: 10px 0 5px 0; font-size: 13px; color: #ddd; display: flex; align-items: center; gap: 8px;">
+        <input type="checkbox" id="auto-retry-fusion" style="cursor: pointer; width: 15px; height: 15px;">
+        <label for="auto-retry-fusion" style="cursor: pointer; user-select: none;">Repetir fusão enquanto falhar</label>
+      </div>
+
       <button id="fiss-btn" class="btn btn-danger"><span class="btn-icon">💥</span> Fissão de Emerg.</button>
 
       <!-- Stats -->
@@ -79,6 +85,20 @@
       <!-- Credits -->
       <div style="margin-top: 15px; text-align: center; font-size: 0.75em; color: rgba(255,255,255,0.5);">
         Criado por Flávio Cunha, flavioescunha@gmail.com
+      </div>
+
+      <!-- HR Diagram Panel -->
+      <div id="hr-panel" title="Clique para expandir/reduzir diagrama H-R">
+        <div class="hr-header">
+          <label for="star-mass-input">Massa (M<sub>☉</sub>):</label>
+          <input type="number" id="star-mass-input" value="1" step="0.1" min="0.1" max="100">
+        </div>
+        <div id="hr-diagram-bg">
+          <div id="hr-star-marker"></div>
+        </div>
+        <div class="hr-reference">
+          Fonte: https://astro.if.ufrgs.br/estrelas/node14.htm
+        </div>
       </div>
     </div>
 
@@ -204,6 +224,39 @@
         </a>
       </p>
       <p class="flavor">"As estrelas são as forjas do universo."</p>
+      
+      <div class="star-selector" style="margin-top: 15px;">
+        <label for="star-select" style="font-weight: bold; margin-right: 10px;">Estrela Inicial:</label>
+        <select id="star-select" style="padding: 5px; font-family: 'Rajdhani', sans-serif; font-size: 1.1em; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid #00d2ff; border-radius: 4px;">
+          <option value="sol">Sol</option>
+          <option value="proxima">Próxima Centauri</option>
+          <option value="deneb">Deneb</option>
+          <option value="aldebaran">Aldebaran</option>
+          <option value="betelgeuse">Betelgeuse</option>
+          <option value="procyon_b">Procyon B</option>
+          <option value="eridani_b">Eridani B</option>
+        </select>
+        <script>
+          document.getElementById('star-select').addEventListener('change', function() {
+            const masses = {
+              'sol': 1.0,
+              'proxima': 0.12,
+              'deneb': 19.0,
+              'aldebaran': 1.16,
+              'betelgeuse': 16.5,
+              'procyon_b': 0.6,
+              'eridani_b': 0.5
+            };
+            const input = document.getElementById('star-mass-input');
+            if (input && masses[this.value]) {
+              input.value = masses[this.value];
+              // Disparar evento de input para que o hr_diagram.js capture a mudança (caso esteja rodando)
+              input.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+          });
+        </script>
+      </div>
+
       <button id="start-btn" class="btn btn-primary" style="margin-top:20px;">Iniciar Simulação</button>
       <div id="game-version" style="margin-top: 15px; font-size: 11px; color: rgba(255, 255, 255, 0.4); text-align: center; font-family: var(--font-hud);"></div>
     </div>
@@ -232,13 +285,14 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/data.js?v=12"></script>
+  <script src="js/data.js?v=13"></script>
   <audio id="bgm" src="Space Forge Background BGM.mp3" loop autoplay></audio>
 
   <script src="js/physics.js"></script>
-  <script src="js/audio.js?v=12"></script>
-  <script src="js/nucleus_v2.js?v=12"></script>
-  <script src="js/game_v2.js?v=12"></script>
+  <script src="js/audio.js?v=13"></script>
+  <script src="js/nucleus_v2.js?v=13"></script>
+  <script src="js/game_v2.js?v=13"></script>
+  <script src="js/hr_diagram.js?v=13"></script>
   
   <script>
     // Controle dos painéis no celular
